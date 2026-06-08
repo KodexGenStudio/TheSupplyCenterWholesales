@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>The Supply Center | Premium Vintage Bulk</title>
+  <meta name="description" content="Exclusive unopened bales & luxury vintage lots. Minimum order £400. WhatsApp concierge checkout.">
+  <!-- Preconnect & Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-dark: #0a0a0a;
+      --bg-elevated: #111111;
+      --surface: #1a1a1a;
+      --gold: #c7a86b;
+      --gold-light: #e0c894;
+      --gold-glow: rgba(199, 168, 107, 0.2);
+      --text-primary: #f5f0eb;
+      --text-secondary: #b9b3ad;
+      --border-subtle: rgba(255,255,255,0.06);
+      --card-radius: 28px;
+      --transition-smooth: cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      --shadow-elevated: 0 20px 35px -12px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03);
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* custom scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #1a1a1a; }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+
+    /* premium typography */
+    h1, h2, h3, .logo, .product-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    /* animated bg grain */
+    .grain-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      opacity: 0.4;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 28px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* premium header */
+    .header {
+      backdrop-filter: blur(12px);
+      background: rgba(10,10,10,0.7);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 18px 0;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #fff 30%, var(--gold) 80%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-decoration: none;
+    }
+
+    .logo span { font-size: 0.9rem; display: block; letter-spacing: 0.2em; color: var(--gold); background: none; -webkit-background-clip: unset; background-clip: unset; }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .cart-icon {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(4px);
+      padding: 10px 20px;
+      border-radius: 60px;
+      border: 1px solid var(--border-subtle);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .cart-icon:hover { background: rgba(199,168,107,0.1); border-color: var(--gold); }
+    .cart-count {
+      background: var(--gold);
+      color: #0a0a0a;
+      border-radius: 30px;
+      padding: 2px 8px;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+
+    /* hero section */
+    .hero {
+      padding: 70px 0 50px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 8vw, 5rem);
+      font-weight: 500;
+      background: linear-gradient(135deg, #ffffff 20%, var(--gold) 90%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero p {
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 20px auto 0;
+      font-size: 1.1rem;
+    }
+
+    /* filter bar */
+    .filter-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 40px 0 30px;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .filter-select {
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      padding: 10px 18px;
+      border-radius: 40px;
+      color: var(--text-primary);
+      font-family: 'Inter', monospace;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .filter-select:hover { border-color: var(--gold); }
+
+    /* premium product grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 32px;
+      margin: 30px 0 60px;
+    }
+
+    .product-card {
+      background: var(--surface);
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      backdrop-filter: blur(2px);
+      transition: transform 0.4s var(--transition-smooth), box-shadow 0.3s;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      border: 1px solid var(--border-subtle);
+      position: relative;
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-elevated);
+      border-color: rgba(199,168,107,0.3);
+    }
+
+    .card-media {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      background: #151515;
+    }
+    .card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+    .product-card:hover .card-media img {
+      transform: scale(1.05);
+    }
+    .secondary-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    .product-card:hover .secondary-img {
+      opacity: 1;
+    }
+    .bulk-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px);
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      border-left: 2px solid var(--gold);
+      z-index: 2;
+    }
+
+    .card-info {
+      padding: 22px 18px 24px;
+    }
+    .product-title {
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .product-price {
+      color: var(--gold);
+      font-weight: 600;
+      font-size: 1.3rem;
+      margin: 12px 0 16px;
+    }
+    .btn-add {
+      width: 100%;
+      background: rgba(199,168,107,0.1);
+      border: 1px solid rgba(199,168,107,0.4);
+      border-radius: 60px;
+      padding: 12px 0;
+      font-weight: 600;
+      color: var(--gold-light);
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.25s;
+      backdrop-filter: blur(4px);
+    }
+    .btn-add:hover {
+      background: var(--gold);
+      color: #0a0a0a;
+      border-color: var(--gold);
+      box-shadow: 0 0 12px var(--gold-glow);
+    }
+
+    /* Cart Drawer Premium */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.3s;
+    }
+    .drawer-overlay.active {
+      visibility: visible;
+      opacity: 1;
+    }
+    .cart-drawer {
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 480px;
+      max-width: 90vw;
+      height: 100%;
+      background: #0e0e0e;
+      border-left: 1px solid var(--border-subtle);
+      z-index: 1001;
+      padding: 28px 24px;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(20px);
+    }
+    .cart-drawer.active {
+      transform: translateX(0);
+    }
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+    .cart-header h3 { font-size: 1.8rem; font-family: 'Cormorant Garamond', serif; }
+    .close-cart {
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+    .cart-items-list {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .cart-item {
+      display: flex;
+      gap: 14px;
+      background: #151515;
+      padding: 12px;
+      border-radius: 20px;
+      border: 1px solid var(--border-subtle);
+    }
+    .cart-item-img {
+      width: 70px;
+      height: 70px;
+      border-radius: 16px;
+      object-fit: cover;
+    }
+    .cart-item-details { flex: 1; }
+    .cart-item-title { font-weight: 600; margin-bottom: 4px; }
+    .cart-item-price { color: var(--gold); font-size: 0.9rem; }
+    .remove-item {
+      background: none;
+      border: none;
+      color: #aaa;
+      font-size: 0.7rem;
+      margin-top: 6px;
+      cursor: pointer;
+    }
+    .cart-total {
+      margin: 20px 0;
+      font-size: 1.6rem;
+      font-weight: 600;
+      text-align: right;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 18px;
+    }
+    .whatsapp-checkout {
+      background: #25D366;
+      border: none;
+      padding: 16px;
+      border-radius: 50px;
+      font-weight: bold;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: #0a0a0a;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 10px;
+    }
+    .whatsapp-checkout:hover { background: #20b859; transform: scale(0.98); }
+
+    /* animations on scroll */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* mobile optimization */
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+      .nav-links { display: none; } /* keep minimal, can be expanded but premium minimal */
+      .header-inner { justify-content: space-between; }
+      .products-grid { gap: 20px; }
+      .card-info { padding: 16px; }
+      .product-title { font-size: 1.2rem; }
+      .cart-drawer { width: 100%; padding: 20px; }
+    }
+
+    footer {
+      background: #060606;
+      border-top: 1px solid var(--border-subtle);
+      padding: 40px 0;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .footer-text { color: var(--text-secondary); font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+<div class="grain-overlay"></div>
+
+<header class="header">
+  <div class="container header-inner">
+    <a href="#" class="logo">THE SUPPLY CENTER<br><span>VINTAGE WHOLESALE</span></a>
+    <div class="nav-links">
+      <a href="#">BULK BALES</a>
+      <a href="#">WHOLESALE</a>
+      <a href="#">CONCIERGE</a>
+    </div>
+    <div class="cart-icon" id="openCartBtn">
+      <span>🛒</span> <span class="cart-count" id="cartCountDisplay">0</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <div class="hero fade-up">
+      <h1>Unopened Bales<br>Master Selection</h1>
+      <p>Curated premium vintage lots · Minimum order £400 · Personal WhatsApp checkout</p>
+    </div>
+
+    <div class="filter-bar fade-up">
+      <div class="filter-stats"><span id="productCount">0</span> exclusive bulk lots</div>
+      <select id="sortSelect" class="filter-select">
+        <option value="default">Featured (Best Selling)</option>
+        <option value="low-high">Price: Low to High</option>
+        <option value="high-low">Price: High to Low</option>
+      </select>
+    </div>
+
+    <div class="products-grid" id="productsGrid"></div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <p class="footer-text">© 2025 THE SUPPLY CENTER — Premium vintage bales worldwide.<br>All orders processed via WhatsApp personal shopping.</p>
+    <div style="margin-top: 16px;"><span style="background: #1a1a1a; padding: 4px 12px; border-radius: 40px; font-size:0.7rem;">📦 BULK ONLY • NO VAT • DIRECT TRADE</span></div>
+  </div>
+</footer>
+
+<!-- Cart Drawer -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h3>Your vault</h3>
+    <button class="close-cart" id="closeCartBtn">✕</button>
+  </div>
+  <div class="cart-items-list" id="cartItemsList"></div>
+  <div class="cart-total" id="cartTotal">£0.00</div>
+  <button class="whatsapp-checkout" id="whatsappCheckoutBtn">
+    <span>💬</span> Complete order via WhatsApp
+  </button>
+  <p style="font-size: 11px; text-align: center; margin-top: 14px; opacity: 0.6;">You will be redirected with your cart summary</p>
+</div>
+
+<script>
+  // ---------- BULK PRODUCTS (≥ £400) ----------
+  const productsData = [
+    { id: "cargo_bale", title: "Unopened Bale · Cargo & Chino Shorts", price: 420, image: "https://pickvintagewholesale.com/cdn/shop/files/FullSizeRender_065d134a-c9e0-4d56-b65a-c4a340b763c7.heic?v=1779296918&width=600", hoverImg: "https://pickvintagewholesale.com/cdn/shop/files/preview_images/b314dc79d6394e3cb500ebc1c4437bba.thumbnail.0000000000.jpg?v=1779296037&width=600" },
+    { id: "polo_bale", title: "Unopened Bale · Branded Polo Shirts 150pcs", price: 540, image: "https://pickvintagewholesale.com/cdn/shop/files/FullSizeRender_712a650f-ca07-4c52-87a2-cb91dffb1b81.heic?v=1779198241&width=600", hoverImg: "https://pickvintagewholesale.com/cdn/shop/files/preview_images/ccfac9b6e80b489fb0e2bb3fca413883.thumbnail.0000000000.jpg?v=1779198359&width=600" },
+    { id: "y2k_cami_bale", title: "Unopened Bale · Y2K Camis/Tank Tops 300pcs", price: 1080, image: "https://pickvintagewholesale.com/cdn/shop/files/FullSizeRender_2a0d52bd-d883-4ccd-b68c-eb86c70d7d65.heic?v=1779263918&width=600", hoverImg: "https://pickvintagewholesale.com/cdn/shop/files/FullSizeRender_7f936339-a648-4184-864d-b5efa3e80c49.heic?v=1779263934&width=600" },
+    { id: "band_tee_bale", title: "Unopened Bale · Band T-Shirts 200pcs", price: 720, image: "https://pickvintagewholesale.com/cdn/shop/files/FullSizeRender_5c60b5b6-1922-45af-9b52-8c2a14d8517d.heic?v=1778783093&width=600", hoverImg: "https://pickvintagewholesale.com/cdn/shop/files/FullSizeRender_8cabcb5b-b726-4b25-87d3-7adc85a409c2.heic?v=1778783102&width=600" },
+    { id: "longsleeve_bale", title: "Unopened Bale · Y2K Long Sleeve 300pcs", price: 1080, image: "https://pickvintagewholesale.com/cdn/shop/files/1D772AC5-79AC-47F9-AD44-89C10C7A5630.jpg?v=1778789931&width=600", hoverImg: "https://pickvintagewholesale.com/cdn/shop/files/FullSizeRender_dd1d4768-6082-4a5d-89bd-95417f6d5c2b.heic?v=1778778637&width=600" },
+    { id: "sports_jersey", title: "Unopened Bale · Pro Sports Jerseys 100pcs", price: 960, image: "https://pickvintagewholesale.com/cdn/shop/files/FullSizeRender_744abd87-f604-4608-ba35-b1d0c2f3f0a3.heic?v=1779817742&width=600", hoverImg: "https://pickvintagewholesale.com/cdn/shop/files/FullSizeRender_2a0bed34-3082-4e4e-b0dc-aaf2b6867065.heic?v=1779817818&width=600" },
+    { id: "sweatshirt_bale", title: "Unopened Bale · Pro Sports Sweatshirts 60pcs", price: 576, image: "https://pickvintagewholesale.com/cdn/shop/files/FullSizeRender_6c8d92f2-fcbb-4fe5-8565-c61269276998.heic?v=1779287698&width=600", hoverImg: "https://pickvintagewholesale.com/cdn/shop/files/preview_images/cb24dc893342454b8293930e5a4a4319.thumbnail.0000000000.jpg?v=1779287716&width=600" },
+    { id: "y2k_skirts", title: "Unopened Bale · Y2K Mixed Skirts 250pcs", price: 900, image: "https://pickvintagewholesale.com/cdn/shop/files/FullSizeRender_5af0a1b5-5c48-400f-9b69-c0518803499c.heic?v=1779294642&width=600", hoverImg: "https://pickvintagewholesale.com/cdn/shop/files/FullSizeRender_54f3060a-280a-405c-bd9e-e0260b043f9c.heic?v=1779293657&width=600" },
+    { id: "y2k_dresses", title: "Unopened Bale · Y2K Dresses 200pcs", price: 960, image: "https://pickvintagewholesale.com/cdn/shop/files/FullSizeRender_d250837e-7d76-4bc7-bd84-5e2b52636bc4.heic?v=1779281098&width=600", hoverImg: "https://pickvintagewholesale.com/cdn/shop/files/preview_images/fc028fd574df4256b5c937ffc986d252.thumbnail.0000000000.jpg?v=1779281164&width=600" },
+    { id: "denim_waist", title: "Unopened Bale · Y2K Denim Waistcoats 200pcs", price: 720, image: "https://pickvintagewholesale.com/cdn/shop/files/FullSizeRender_12043d22-bcde-4dce-b89a-e61cd2e63d84.heic?v=1779264084&width=600", hoverImg: "https://pickvintagewholesale.com/cdn/shop/files/preview_images/05ffa639a35044768d2efe9d08a98aac.thumbnail.0000000000.jpg?v=1779265108&width=600" }
+  ];
+
+  // cart state
+  let cart = [];
+
+  // DOM elements
+  const productsGrid = document.getElementById('productsGrid');
+  const cartCountSpan = document.getElementById('cartCountDisplay');
+  const cartItemsContainer = document.getElementById('cartItemsList');
+  const cartTotalSpan = document.getElementById('cartTotal');
+  const productCountSpan = document.getElementById('productCount');
+  const sortSelect = document.getElementById('sortSelect');
+
+  // Helper: save & update UI
+  function saveCart() {
+    localStorage.setItem('supplyCart', JSON.stringify(cart));
+    updateCartUI();
+    updateCartDrawer();
+  }
+
+  function loadCart() {
+    const saved = localStorage.getItem('supplyCart');
+    if (saved) {
+      try { cart = JSON.parse(saved); } catch(e) { cart = []; }
+    } else { cart = []; }
+    updateCartUI();
+    updateCartDrawer();
+  }
+
+  function addToCart(productId) {
+    const product = productsData.find(p => p.id === productId);
+    if (!product) return;
+    const existing = cart.find(i => i.id === productId);
+    if (existing) existing.quantity += 1;
+    else cart.push({ ...product, quantity: 1 });
+    saveCart();
+    // subtle haptic feedback (no alert but visual animation)
+    const btn = document.querySelector(`.btn-add[data-id='${productId}']`);
+    if (btn) {
+      btn.style.transform = 'scale(0.97)';
+      setTimeout(() => btn.style.transform = '', 150);
+    }
+  }
+
+  function removeItem(productId) {
+    cart = cart.filter(i => i.id !== productId);
+    saveCart();
+  }
+
+  function updateCartUI() {
+    const totalQty = cart.reduce((sum, i) => sum + i.quantity, 0);
+    cartCountSpan.innerText = totalQty;
+  }
+
+  function updateCartDrawer() {
+    if (!cartItemsContainer) return;
+    if (cart.length === 0) {
+      cartItemsContainer.innerHTML = `<div style="text-align:center; padding:30px; color:#aaa;">Your vault is empty.<br>Add premium bales (£400+)</div>`;
+      cartTotalSpan.innerText = `£0.00`;
+      return;
+    }
+    let html = '';
+    let total = 0;
+    cart.forEach(item => {
+      const itemTotal = item.price * item.quantity;
+      total += itemTotal;
+      html += `
+        <div class="cart-item">
+          <img class="cart-item-img" src="${item.image}" alt="${item.title}">
+          <div class="cart-item-details">
+            <div class="cart-item-title">${item.title}</div>
+            <div class="cart-item-price">£${item.price.toFixed(2)} × ${item.quantity}</div>
+            <button class="remove-item" data-id="${item.id}">Remove</button>
+          </div>
+        </div>
+      `;
+    });
+    cartItemsContainer.innerHTML = html;
+    cartTotalSpan.innerText = `£${total.toFixed(2)}`;
+    document.querySelectorAll('.remove-item').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = btn.getAttribute('data-id');
+        removeItem(id);
+      });
+    });
+  }
+
+  // WhatsApp Checkout (premium formatted)
+  function whatsappCheckout() {
+    if (cart.length === 0) {
+      alert("Your vault is empty. Please add bulk bales (minimum £400+).");
+      return;
+    }
+    let totalCart = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
+    if (totalCart < 400) {
+      alert(`Minimum bulk order is £400. Current total: £${totalCart.toFixed(2)}. Add more bales.`);
+      return;
+    }
+    let message = `🛍️ *NEW BULK ORDER - THE SUPPLY CENTER*%0A`;
+    message += `━━━━━━━━━━━━━━━━━━%0A`;
+    cart.forEach((item, idx) => {
+      message += `*${idx+1}. ${item.title}*%0A`;
+      message += `   Qty: ${item.quantity} × £${item.price.toFixed(2)} = £${(item.price * item.quantity).toFixed(2)}%0A`;
+    });
+    message += `━━━━━━━━━━━━━━━━━━%0A`;
+    message += `💰 *TOTAL: £${totalCart.toFixed(2)}*%0A`;
+    message += `📦 *PREMIUM VINTAGE BALES*%0A`;
+    message += `🔹 Ready to buy, please confirm shipping.`;
+    const encoded = encodeURIComponent(message);
+    window.open(`https://wa.me/16415695059?text=${encoded}`, '_blank');
+  }
+
+  // render product grid with animation & sort
+  let currentProducts = [...productsData];
+
+  function renderProducts(products) {
+    productsGrid.innerHTML = '';
+    productCountSpan.innerText = products.length;
+    products.forEach((product, idx) => {
+      const card = document.createElement('div');
+      card.className = 'product-card fade-up';
+      if (idx % 2 === 0) card.style.transitionDelay = '0.05s';
+      card.innerHTML = `
+        <div class="card-media">
+          <div class="bulk-badge">UNOPENED BALE</div>
+          <img src="${product.image}" alt="${product.title}" loading="lazy">
+          <img class="secondary-img" src="${product.hoverImg}" alt="${product.title}" loading="lazy">
+        </div>
+        <div class="card-info">
+          <div class="product-title">${product.title}</div>
+          <div class="product-price">£${product.price.toFixed(2)}</div>
+          <button class="btn-add" data-id="${product.id}">⟡ ADD TO CART ⟡</button>
+        </div>
+      `;
+      productsGrid.appendChild(card);
+    });
+    document.querySelectorAll('.btn-add').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = btn.getAttribute('data-id');
+        addToCart(id);
+      });
+    });
+    // trigger scroll animation
+    const fadeElements = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    fadeElements.forEach(el => observer.observe(el));
+  }
+
+  function sortProducts(order) {
+    let sorted = [...productsData];
+    if (order === 'low-high') sorted.sort((a,b) => a.price - b.price);
+    else if (order === 'high-low') sorted.sort((a,b) => b.price - a.price);
+    else sorted = [...productsData];
+    renderProducts(sorted);
+  }
+
+  // event listeners
+  sortSelect.addEventListener('change', (e) => {
+    sortProducts(e.target.value);
+  });
+
+  // cart drawer controls
+  const openBtn = document.getElementById('openCartBtn');
+  const closeCartBtn = document.getElementById('closeCartBtn');
+  const overlay = document.getElementById('drawerOverlay');
+  const drawer = document.getElementById('cartDrawer');
+  const whatsappBtn = document.getElementById('whatsappCheckoutBtn');
+
+  function openDrawer() {
+    drawer.classList.add('active');
+    overlay.classList.add('active');
+    updateCartDrawer();
+  }
+  function closeDrawer() {
+    drawer.classList.remove('active');
+    overlay.classList.remove('active');
+  }
+  openBtn?.addEventListener('click', openDrawer);
+  closeCartBtn?.addEventListener('click', closeDrawer);
+  overlay?.addEventListener('click', closeDrawer);
+  whatsappBtn?.addEventListener('click', whatsappCheckout);
+
+  // initial load
+  loadCart();
+  renderProducts(productsData);
+  // fade-up init
+  setTimeout(() => {
+    document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+  }, 100);
+</script>
+</body>
+</html>
